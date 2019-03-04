@@ -7,11 +7,13 @@ import {
 
 import TabBarIcon from "../components/TabBarIcon";
 import QuestionScreen from "../screens/MainScreens/QuestionScreen";
+import QuestionScreen2 from "../screens/MainScreens/QuestionScreen2";
 import MealPlanScreen from "../screens/MainScreens/MealPlanScreen";
 import CaloriesByDishNameScreen from "../screens/MainScreens/CaloriesByDishNameScreen";
 
 const QuestionStack = createStackNavigator({
-  Question: QuestionScreen
+  Question: QuestionScreen,
+  Question2: QuestionScreen2
 });
 
 QuestionStack.navigationOptions = {

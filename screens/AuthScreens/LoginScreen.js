@@ -26,7 +26,7 @@ class LoginScreen extends Component {
     firebase.auth().onAuthStateChanged(user => {
       if (user != null) {
         // console.log(user);
-        this.props.navigation.navigate("App");
+        this.props.navigation.navigate("Question");
       } else {
         this.FacebookLogIn();
       }
