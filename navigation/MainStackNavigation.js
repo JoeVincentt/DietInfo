@@ -9,6 +9,8 @@ import TabBarIcon from "../components/TabBarIcon";
 import QuestionScreen from "../screens/MainScreens/QuestionScreen";
 import QuestionScreen2 from "../screens/MainScreens/QuestionScreen2";
 import MealPlanScreen from "../screens/MainScreens/MealPlanScreen";
+import MealPlanScreen2 from "../screens/MainScreens/MealPlanScreen2";
+import MealPlanScreen3 from "../screens/MainScreens/MealPlanScreen3";
 import CaloriesByDishNameScreen from "../screens/MainScreens/CaloriesByDishNameScreen";
 
 const QuestionStack = createStackNavigator({
@@ -31,7 +33,9 @@ QuestionStack.navigationOptions = {
 };
 
 const MealPlanStack = createStackNavigator({
-  MealPlan: MealPlanScreen
+  MealPlan: MealPlanScreen,
+  MealPlan2: MealPlanScreen2,
+  MealPlan3: MealPlanScreen3
 });
 
 MealPlanStack.navigationOptions = {

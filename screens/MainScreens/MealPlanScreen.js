@@ -18,7 +18,6 @@ import {
   Picker
 } from "native-base";
 import Slider from "react-native-slider";
-
 const _ = require("lodash");
 
 export default class MealPlanScreen extends React.Component {
@@ -30,13 +29,13 @@ export default class MealPlanScreen extends React.Component {
     text: "",
     isLoading: false,
     content: null,
-    selected: undefined,
-    value: 1000
+    selected: "",
+    targetCalories: 1000
   };
 
-  onValueChange = value => {
+  onValueChange = targetCalories => {
     this.setState({
-      selected: value
+      selected: targetCalories
     });
   };
 
@@ -45,52 +44,62 @@ export default class MealPlanScreen extends React.Component {
     return trimmed;
   };
 
-  _searchAnswer = question => {
-    if (this._isEmpty(question)) {
-      alert("It's Empty!");
-    } else if (question.length < 10) {
-      alert("Question too short");
-    } else {
-      this.setState({ isLoading: true });
-      //API fetch logic
-      fetch(
-        `https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/quickAnswer?q=${this._textTrim(
-          this.state.text
-        )}%3F`,
-        {
-          method: "GET",
-          headers: {
-            "X-RapidAPI-Key":
-              "b99dd4b186msheefd2f2cd1467a3p10b334jsnd9346b61c2ed",
-            "content-type": "application/json"
-          }
-        }
-      )
-        .then(response => {
-          return response.json();
-        })
-        .then(data => {
-          return JSON.stringify(data);
-        })
-        .then(data => {
-          const dataObj = JSON.parse(data);
+  _textReductor = state => {
+    const calories = state.targetCalories;
+    const diet = state.selected;
+    const exclude = state.text;
 
-          if (_.isEmpty(dataObj)) {
-            this.setState({ isLoading: false });
-            alert("Try Ask Something Different Please!");
-            return;
-          }
-          this.setState({ content: dataObj, isLoading: false });
-          this.props.navigation.navigate("Question2", {
-            content: this.state.content
-          });
-        })
-        .catch(err => console.log(err));
+    if (diet.trim().length === 0 && exclude.trim().length === 0) {
+      return `https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/mealplans/generate?timeFrame=day&targetCalories=${calories}`;
     }
+
+    if (diet.trim().length !== 0 && exclude.trim().length === 0) {
+      return `https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/mealplans/generate?timeFrame=day&targetCalories=${calories}&diet=${diet}`;
+    }
+
+    if (diet.trim().length === 0 && exclude.trim().length !== 0) {
+      let ex = exclude
+        .split(" ")
+        .join("%2C+")
+        .split(",")
+        .join("");
+
+      return `https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/mealplans/generate?timeFrame=day&targetCalories=${calories}&exclude=${ex}`;
+    }
+
+    let ex = exclude
+      .split(" ")
+      .join("%2C+")
+      .split(",")
+      .join("");
+
+    return `https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/mealplans/generate?timeFrame=day&targetCalories=${calories}&diet=${diet}&exclude=${ex}`;
   };
 
-  _isEmpty = question => {
-    return !question.replace(/\s+/, "").length;
+  _searchAnswer = state => {
+    this.setState({ isLoading: true });
+    //API fetch logic
+    fetch(this._textReductor(state), {
+      method: "GET",
+      headers: {
+        "X-RapidAPI-Key": "b99dd4b186msheefd2f2cd1467a3p10b334jsnd9346b61c2ed",
+        "content-type": "application/json"
+      }
+    })
+      .then(response => {
+        return response.json();
+      })
+      .then(data => {
+        return JSON.stringify(data);
+      })
+      .then(data => {
+        const dataObj = JSON.parse(data);
+        this.setState({ content: dataObj, isLoading: false });
+        this.props.navigation.navigate("MealPlan2", {
+          content: this.state.content
+        });
+      })
+      .catch(err => console.log(err));
   };
 
   render() {
@@ -107,15 +116,19 @@ export default class MealPlanScreen extends React.Component {
             <View style={styles.container}>
               <View
                 style={{
-                  marginLeft: 10,
-                  marginRight: 10,
+                  margin: 20,
                   alignItems: "stretch",
                   justifyContent: "center"
                 }}
               >
+                <View style={{ alignItems: "center" }}>
+                  <Text style={styles.textstyle}>Choose Daily Target:</Text>
+                </View>
                 <Slider
-                  value={this.state.value}
-                  onValueChange={value => this.setState({ value })}
+                  value={this.state.targetCalories}
+                  onValueChange={targetCalories =>
+                    this.setState({ targetCalories })
+                  }
                   minimumValue={1000}
                   maximumValue={5000}
                   step={100}
@@ -126,65 +139,64 @@ export default class MealPlanScreen extends React.Component {
                   thumbTintColor="red"
                   thumbTouchSize={{ width: 60, height: 60 }}
                 />
-                <Text>Value: {this.state.value}</Text>
+                <Text>{this.state.targetCalories} Calories</Text>
               </View>
-              <Form>
-                <Picker
-                  mode="dropdown"
-                  placeholder="Select One"
-                  placeholderStyle={{ color: "#2874F0" }}
-                  note={false}
-                  headerStyle={{ backgroundColor: "#b95dd3" }}
-                  headerBackButtonTextStyle={{ color: "#fff" }}
-                  headerTitleStyle={{ color: "#fff" }}
-                  selectedValue={this.state.selected}
-                  onValueChange={this.onValueChange}
-                >
-                  <Picker.Item label="Wallet" value="key0" />
-                  <Picker.Item label="ATM Card" value="key1" />
-                  <Picker.Item label="Debit Card" value="key2" />
-                  <Picker.Item label="Credit Card" value="key3" />
-                  <Picker.Item label="Net Banking" value="key4" />
-                </Picker>
-              </Form>
-              <Form>
-                <Picker
-                  mode="dropdown"
-                  placeholder="Select One"
-                  placeholderStyle={{ color: "#2874F0" }}
-                  note={false}
-                  headerStyle={{ backgroundColor: "#b95dd3" }}
-                  headerBackButtonTextStyle={{ color: "#fff" }}
-                  headerTitleStyle={{ color: "#fff" }}
-                  selectedValue={this.state.selected}
-                  onValueChange={this.onValueChange}
-                >
-                  <Picker.Item label="Wallet" value="key0" />
-                  <Picker.Item label="ATM Card" value="key1" />
-                  <Picker.Item label="Debit Card" value="key2" />
-                  <Picker.Item label="Credit Card" value="key3" />
-                  <Picker.Item label="Net Banking" value="key4" />
-                </Picker>
-              </Form>
-              <View style={styles.container}>
-                <TextInput
-                  style={{ height: 100, fontSize: 30 }}
-                  multiline={true}
-                  numberOfLines={4}
-                  editable={true}
-                  maxLength={60}
-                  placeholder="Ask me..."
-                  onChangeText={text => this.setState({ text })}
-                />
+              <View style={{ margin: 20, alignItems: "center" }}>
+                <Text style={styles.textstyle}>
+                  Choose Diet Type (optional):
+                </Text>
+
+                <Form>
+                  <Picker
+                    mode="dropdown"
+                    placeholder="Pick One"
+                    placeholderStyle={{ color: "#2874F0" }}
+                    note={false}
+                    headerStyle={{ backgroundColor: "#b95dd3" }}
+                    headerBackButtonTextStyle={{ color: "#fff" }}
+                    headerTitleStyle={{ color: "#fff" }}
+                    selectedValue={this.state.selected}
+                    onValueChange={this.onValueChange}
+                  >
+                    <Picker.Item label="Vegetarian" value="vegetarian" />
+                    <Picker.Item label="Vegan" value="vegan" />
+                    <Picker.Item label="Paleo" value="paleo" />
+                  </Picker>
+                </Form>
               </View>
 
-              <View style={{ top: 30 }}>
+              <View style={styles.container}>
+                <View style={{ marginHorizontal: 20 }}>
+                  <Text style={styles.textstyle}>
+                    A comma-separated list of allergens or ingredients that must
+                    be excluded.
+                  </Text>
+
+                  <TextInput
+                    style={{ height: 100, fontSize: 24 }}
+                    multiline={true}
+                    numberOfLines={4}
+                    editable={true}
+                    maxLength={20}
+                    placeholder="Example: shellfish, olives"
+                    onChangeText={text =>
+                      this.setState({ text: text.toLowerCase() })
+                    }
+                  />
+                </View>
+              </View>
+
+              <View
+                style={{
+                  top: 30
+                }}
+              >
                 <Button
                   iconLeft
                   full
                   success
                   style={{ height: 80 }}
-                  onPress={() => this._searchAnswer(this.state.text)}
+                  onPress={() => this._searchAnswer(this.state)}
                 >
                   <Icon name="search" style={{ fontSize: 50 }} />
                   <Text style={{ left: 10, fontSize: 40, color: "white" }}>
@@ -203,8 +215,10 @@ export default class MealPlanScreen extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    alignContent: "center",
-    justifyContent: "center",
     top: 20
+  },
+  textstyle: {
+    fontSize: 20,
+    fontFamily: "roboto-regular"
   }
 });
