@@ -11,7 +11,7 @@ import QuestionScreen2 from "../screens/MainScreens/QuestionScreen2";
 import MealPlanScreen from "../screens/MainScreens/MealPlanScreen";
 import MealPlanScreen2 from "../screens/MainScreens/MealPlanScreen2";
 import MealPlanScreen3 from "../screens/MainScreens/MealPlanScreen3";
-import CaloriesByDishNameScreen from "../screens/MainScreens/CaloriesByDishNameScreen";
+import LandingScreen from "../screens/MainScreens/LandingScreen";
 
 const QuestionStack = createStackNavigator({
   Question: QuestionScreen,
@@ -23,11 +23,7 @@ QuestionStack.navigationOptions = {
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={
-        Platform.OS === "ios"
-          ? `ios-information-circle${focused ? "" : "-outline"}`
-          : "md-information-circle"
-      }
+      name={Platform.OS === "ios" ? `ios-help-buoy` : "md-help-buoy"}
     />
   )
 };
@@ -39,31 +35,31 @@ const MealPlanStack = createStackNavigator({
 });
 
 MealPlanStack.navigationOptions = {
-  tabBarLabel: "Get Plan",
+  tabBarLabel: "Get Meal Plan",
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={Platform.OS === "ios" ? "ios-link" : "md-link"}
+      name={Platform.OS === "ios" ? "ios-paper" : "md-paper"}
     />
   )
 };
 
-const CalorieByDishNameStack = createStackNavigator({
-  CalByDish: CaloriesByDishNameScreen
+const LandingStack = createStackNavigator({
+  Landing: LandingScreen
 });
 
-CalorieByDishNameStack.navigationOptions = {
-  tabBarLabel: "Eating Now",
+LandingStack.navigationOptions = {
+  tabBarLabel: "Home",
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={Platform.OS === "ios" ? "ios-options" : "md-options"}
+      name={Platform.OS === "ios" ? "ios-home" : "md-home"}
     />
   )
 };
 
 export default createBottomTabNavigator({
   MealPlanStack,
-  CalorieByDishNameStack,
+  LandingStack,
   QuestionStack
 });

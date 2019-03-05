@@ -84,82 +84,93 @@ export default class QuestionScreen extends React.Component {
 
   render() {
     return (
-      <Container>
-        {this.state.isLoading ? (
-          <View
-            style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
-          >
-            <Spinner />
-          </View>
-        ) : (
-          <Content>
-            <View style={styles.container}>
-              <TextInput
-                style={{ height: 100, fontSize: 30 }}
-                multiline={true}
-                numberOfLines={4}
-                editable={true}
-                maxLength={60}
-                placeholder="Ask me..."
-                onChangeText={text => this.setState({ text })}
-              />
-            </View>
-            <View style={styles.container}>
-              <Text style={{ padding: 10, fontSize: 18, color: "lightgray" }}>
-                {this.state.text && ".min 10 symbol."}
-              </Text>
-            </View>
-            <View style={styles.container}>
-              <Text style={{ padding: 10, fontSize: 42 }}>
-                {this.state.text && "❓"}
-              </Text>
-            </View>
-            <View style={{ top: 30 }}>
-              <Button
-                iconLeft
-                full
-                success
-                style={{ height: 80 }}
-                onPress={() => this._searchAnswer(this.state.text)}
-              >
-                <Icon name="search" style={{ fontSize: 50 }} />
-                <Text style={{ left: 10, fontSize: 40, color: "white" }}>
-                  {" "}
-                  Look up
-                </Text>
-              </Button>
-            </View>
+      <ScrollView>
+        <Container>
+          {this.state.isLoading ? (
             <View
               style={{
                 flex: 1,
-                flexDirection: "column",
-                top: 50,
-                marginHorizontal: 50,
-                alignItems: "center"
+                alignItems: "center",
+                justifyContent: "center"
               }}
             >
-              <Text
+              <Spinner />
+            </View>
+          ) : (
+            <Content>
+              <View style={styles.container}>
+                <TextInput
+                  style={{ height: 100, fontSize: 30 }}
+                  multiline={true}
+                  numberOfLines={4}
+                  editable={true}
+                  maxLength={60}
+                  placeholder="Ask me..."
+                  onChangeText={text => this.setState({ text })}
+                />
+              </View>
+              <View style={styles.container}>
+                <Text style={{ padding: 10, fontSize: 18, color: "lightgray" }}>
+                  {this.state.text && ".min 10 symbol."}
+                </Text>
+              </View>
+              <View style={styles.container}>
+                <Text style={{ padding: 10, fontSize: 42 }}>
+                  {this.state.text && "❓"}
+                </Text>
+              </View>
+              <View
                 style={{
-                  fontSize: 35,
-                  fontWeight: "bold",
-                  color: "black"
+                  top: 30
                 }}
               >
-                {" "}
-                Instructions
-              </Text>
-              <Text style={{ fontSize: 25 }}>
-                Ask a nutrition related natural language question.
-              </Text>
+                <Button
+                  iconLeft
+                  full
+                  success
+                  style={{ height: 80 }}
+                  onPress={() => this._searchAnswer(this.state.text)}
+                >
+                  <Icon name="search" style={{ fontSize: 50, left: -20 }} />
+                  <Text style={{ left: 10, fontSize: 40, color: "white" }}>
+                    {" "}
+                    Look up
+                  </Text>
+                </Button>
+              </View>
+              <View
+                style={{
+                  flex: 1,
+                  flexDirection: "column",
+                  marginTop: 50,
+                  marginHorizontal: 50,
+                  alignItems: "center",
+                  height: "100%"
+                }}
+              >
+                <Text
+                  style={{
+                    fontSize: 35,
+                    fontWeight: "bold",
+                    color: "black"
+                  }}
+                >
+                  {" "}
+                  Instructions
+                </Text>
+                <Text style={{ fontSize: 25 }}>
+                  Ask a nutrition related natural language question.
+                </Text>
 
-              <Text style={{ fontSize: 25 }}>For example:</Text>
-              <Text style={{ fontStyle: "italic", fontSize: 25 }}>
-                'How much vitamin c is in 2 apples?'
-              </Text>
-            </View>
-          </Content>
-        )}
-      </Container>
+                <Text style={{ fontSize: 25 }}>For example:</Text>
+                <Text style={{ fontStyle: "italic", fontSize: 25 }}>
+                  'How much vitamin c is in 2 apples?'
+                </Text>
+              </View>
+            </Content>
+          )}
+        </Container>
+      </ScrollView>
     );
   }
 }

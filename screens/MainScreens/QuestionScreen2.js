@@ -16,11 +16,13 @@ import {
 import { View, Text } from "react-native";
 
 export default class QuestionScreen2 extends Component {
+  static navigationOptions = {
+    title: "Info"
+  };
   state = {
     content: this.props.navigation.getParam("content")
   };
   render() {
-    console.log(this.state.content);
     return (
       <Container style={{ flexDirection: "row", alignItems: "center" }}>
         <Content>

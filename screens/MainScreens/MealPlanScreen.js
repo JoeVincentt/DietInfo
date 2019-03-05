@@ -1,5 +1,12 @@
 import React from "react";
-import { ScrollView, StyleSheet, Text, View, TextInput } from "react-native";
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  Platform
+} from "react-native";
 import {
   Container,
   Header,
@@ -108,7 +115,11 @@ export default class MealPlanScreen extends React.Component {
       <Container>
         {this.state.isLoading ? (
           <View
-            style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
+            style={{
+              flex: 1,
+              alignItems: "center",
+              justifyContent: "center"
+            }}
           >
             <Spinner />
           </View>
@@ -152,24 +163,30 @@ export default class MealPlanScreen extends React.Component {
                 Choose Diet Type{" "}
                 <Text style={{ color: "#4f5256" }}>(optional)</Text>:
               </Text>
-
-              <Form>
-                <Picker
-                  mode="dropdown"
-                  placeholder="Pick One"
-                  placeholderStyle={{ color: "#2874F0" }}
-                  note={false}
-                  headerStyle={{ backgroundColor: "#b95dd3" }}
-                  headerBackButtonTextStyle={{ color: "#fff" }}
-                  headerTitleStyle={{ color: "#fff" }}
-                  selectedValue={this.state.selected}
-                  onValueChange={this.onValueChange}
-                >
-                  <Picker.Item label="Vegetarian" value="vegetarian" />
-                  <Picker.Item label="Vegan" value="vegan" />
-                  <Picker.Item label="Paleo" value="paleo" />
-                </Picker>
-              </Form>
+              <View style={{ flex: 1, justifyContent: "center" }}>
+                <Form>
+                  <Picker
+                    style={{
+                      width: Platform.OS === "ios" ? undefined : 300,
+                      height: Platform.OS === "ios" ? undefined : 100,
+                      flex: Platform.OS === "ios" ? undefined : 1
+                    }}
+                    mode="dropdown"
+                    placeholder="Pick One"
+                    placeholderStyle={{ color: "#2874F0" }}
+                    note={false}
+                    headerStyle={{ backgroundColor: "#b95dd3" }}
+                    headerBackButtonTextStyle={{ color: "#fff" }}
+                    headerTitleStyle={{ color: "#fff" }}
+                    selectedValue={this.state.selected}
+                    onValueChange={this.onValueChange}
+                  >
+                    <Picker.Item label="Vegetarian" value="vegetarian" />
+                    <Picker.Item label="Vegan" value="vegan" />
+                    <Picker.Item label="Paleo" value="paleo" />
+                  </Picker>
+                </Form>
+              </View>
             </View>
 
             <View style={styles.container}>
@@ -195,7 +212,7 @@ export default class MealPlanScreen extends React.Component {
 
             <View
               style={{
-                top: 30
+                marginVertical: 30
               }}
             >
               <Button

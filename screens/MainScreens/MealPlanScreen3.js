@@ -16,17 +16,17 @@ import { Text, Linking } from "react-native";
 
 export default class MealPlanScreen3 extends Component {
   static navigationOptions = {
-    title: "Meal Plan"
+    title: "Recipe"
   };
   state = {
-    // fullRecipe: this.props.navigation.getParam("fullRecipe"),
-    // mealImage: this.props.navigation.getParam("mealImage")
-    mealImage: "Ham-and-Red-Bean-Soup-646185.jpg",
-    fullRecipe: {
-      id: 1017374,
-      title: "Easy Weekday Breakfast Muffins",
-      summary: `Easy Weekday Breakfast Muffins takes about <b>30 minutes</b> from beginning to end. This recipe makes 12 servings with <b>126 calories</b>, <b>9g of protein</b>, and <b>8g of fat</b> each. For <b>48 cents per serving</b>, this recipe <b>covers 8%</b> of your daily requirements of vitamins and minerals. Only a few people really liked this breakfast. It is brought to you by Pink When. 1 person were impressed by this recipe. It is a good option if you're following a <b>gluten free</b> diet. Head to the store and pick up bell pepper, turkey, shredded cheese, and a few other things to make it today. Taking all factors into account, this recipe <b>earns a spoonacular score of 21%</b>, which is rather bad. Similar recipes include <a href="https://spoonacular.com/recipes/easy-weekday-chicken-pot-pie-608322">Easy Weekday Chicken Pot Pie</a>, <a href="https://spoonacular.com/recipes/easy-breakfast-muffins-925366">Easy Breakfast Muffins</a>, and <a href="https://spoonacular.com/recipes/easy-breakfast-muffins-609679">Easy Breakfast Muffins</a>.`
-    }
+    fullRecipe: this.props.navigation.getParam("fullRecipe"),
+    mealImage: this.props.navigation.getParam("mealImage")
+    // mealImage: "Ham-and-Red-Bean-Soup-646185.jpg",
+    // fullRecipe: {
+    //   id: 1017374,
+    //   title: "Easy Weekday Breakfast Muffins",
+    //   summary: `Easy Weekday Breakfast Muffins takes about <b>30 minutes</b> from beginning to end. This recipe makes 12 servings with <b>126 calories</b>, <b>9g of protein</b>, and <b>8g of fat</b> each. For <b>48 cents per serving</b>, this recipe <b>covers 8%</b> of your daily requirements of vitamins and minerals. Only a few people really liked this breakfast. It is brought to you by Pink When. 1 person were impressed by this recipe. It is a good option if you're following a <b>gluten free</b> diet. Head to the store and pick up bell pepper, turkey, shredded cheese, and a few other things to make it today. Taking all factors into account, this recipe <b>earns a spoonacular score of 21%</b>, which is rather bad. Similar recipes include <a href="https://spoonacular.com/recipes/easy-weekday-chicken-pot-pie-608322">Easy Weekday Chicken Pot Pie</a>, <a href="https://spoonacular.com/recipes/easy-breakfast-muffins-925366">Easy Breakfast Muffins</a>, and <a href="https://spoonacular.com/recipes/easy-breakfast-muffins-609679">Easy Breakfast Muffins</a>.`
+    // }
   };
 
   _textEdit = text => {

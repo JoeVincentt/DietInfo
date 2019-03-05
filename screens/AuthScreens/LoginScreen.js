@@ -8,11 +8,11 @@ import { Container, Header, Content, Button, Icon } from "native-base";
 
 class LoginScreen extends Component {
   static navigationOptions = {
-    title: "Fun Test",
+    title: "Diet Info",
     headerStyle: {
-      backgroundColor: "black"
+      backgroundColor: "#fff"
     },
-    headerTintColor: "#fff"
+    headerTintColor: "black"
   };
   constructor(props) {
     super(props);
@@ -26,7 +26,7 @@ class LoginScreen extends Component {
     firebase.auth().onAuthStateChanged(user => {
       if (user != null) {
         // console.log(user);
-        this.props.navigation.navigate("MealPlan");
+        this.props.navigation.navigate("Landing");
       } else {
         this.FacebookLogIn();
       }
@@ -58,7 +58,7 @@ class LoginScreen extends Component {
             Alert.alert("Try Again");
           });
 
-        this.props.navigation.navigate("App");
+        this.props.navigation.navigate("Landing");
       } else {
         // type === 'cancel'
         this.setState({ isLoading: false });
@@ -75,7 +75,7 @@ class LoginScreen extends Component {
           flex: 1,
           alignItems: "center",
           justifyContent: "center",
-          backgroundColor: "black"
+          backgroundColor: "#fff"
         }}
       >
         {this.state.isLoading ? (
@@ -84,14 +84,18 @@ class LoginScreen extends Component {
             <StatusBar barStyle="default" />
           </>
         ) : (
-          <View style={{ alignItems: "center", justifyContent: "center" }}>
-            <Button iconLeft primary block onPress={() => this.FacebookLogIn()}>
-              <Icon name="cog" style={{ right: 10 }} />
-              <Text style={{ color: "#fff", fontSize: 22 }}>
-                Login with Facebook
-              </Text>
-            </Button>
-          </View>
+          <Button
+            iconLeft
+            primary
+            full
+            style={{ height: 80 }}
+            onPress={() => this.FacebookLogIn()}
+          >
+            <Icon name="logo-facebook" style={{ right: 40, fontSize: 40 }} />
+            <Text style={{ color: "#fff", fontSize: 30 }}>
+              Login with Facebook
+            </Text>
+          </Button>
         )}
       </View>
     );
