@@ -15,7 +15,8 @@ import {
   Toast,
   Spinner,
   Form,
-  Picker
+  Picker,
+  H2
 } from "native-base";
 import Slider from "react-native-slider";
 const _ = require("lodash");
@@ -113,98 +114,103 @@ export default class MealPlanScreen extends React.Component {
           </View>
         ) : (
           <Content>
-            <View style={styles.container}>
-              <View
-                style={{
-                  margin: 20,
-                  alignItems: "stretch",
-                  justifyContent: "center"
-                }}
-              >
-                <View style={{ alignItems: "center" }}>
-                  <Text style={styles.textstyle}>Choose Daily Target:</Text>
-                </View>
-                <Slider
-                  value={this.state.targetCalories}
-                  onValueChange={targetCalories =>
-                    this.setState({ targetCalories })
-                  }
-                  minimumValue={1000}
-                  maximumValue={5000}
-                  step={100}
-                  animateTransitions={true}
-                  animationType="spring"
-                  minimumTrackTintColor="blue"
-                  maximumTrackTintColor="green"
-                  thumbTintColor="red"
-                  thumbTouchSize={{ width: 60, height: 60 }}
-                />
-                <Text>{this.state.targetCalories} Calories</Text>
+            <View
+              style={{
+                margin: 20,
+                alignItems: "stretch",
+                justifyContent: "center"
+              }}
+            >
+              <View style={{ alignItems: "center", margin: 20 }}>
+                <H2 style={{ marginBottom: 10 }}>ONE DAY MEAL PLAN</H2>
+                <Text style={{ color: "#4f5256" }}>
+                  Breakfast, Lunch and Dinner
+                </Text>
               </View>
-              <View style={{ margin: 20, alignItems: "center" }}>
+              <View style={{ alignItems: "center" }}>
+                <Text style={styles.textstyle}>Choose Daily Target:</Text>
+              </View>
+              <Slider
+                value={this.state.targetCalories}
+                onValueChange={targetCalories =>
+                  this.setState({ targetCalories })
+                }
+                minimumValue={1000}
+                maximumValue={5000}
+                step={100}
+                animateTransitions={true}
+                animationType="spring"
+                minimumTrackTintColor="blue"
+                maximumTrackTintColor="green"
+                thumbTintColor="red"
+                thumbTouchSize={{ width: 60, height: 60 }}
+              />
+              <Text>{this.state.targetCalories} Calories</Text>
+            </View>
+            <View style={{ margin: 20, alignItems: "center" }}>
+              <Text style={styles.textstyle}>
+                Choose Diet Type{" "}
+                <Text style={{ color: "#4f5256" }}>(optional)</Text>:
+              </Text>
+
+              <Form>
+                <Picker
+                  mode="dropdown"
+                  placeholder="Pick One"
+                  placeholderStyle={{ color: "#2874F0" }}
+                  note={false}
+                  headerStyle={{ backgroundColor: "#b95dd3" }}
+                  headerBackButtonTextStyle={{ color: "#fff" }}
+                  headerTitleStyle={{ color: "#fff" }}
+                  selectedValue={this.state.selected}
+                  onValueChange={this.onValueChange}
+                >
+                  <Picker.Item label="Vegetarian" value="vegetarian" />
+                  <Picker.Item label="Vegan" value="vegan" />
+                  <Picker.Item label="Paleo" value="paleo" />
+                </Picker>
+              </Form>
+            </View>
+
+            <View style={styles.container}>
+              <View style={{ marginHorizontal: 20 }}>
                 <Text style={styles.textstyle}>
-                  Choose Diet Type (optional):
+                  A comma-separated list of allergens or ingredients that must
+                  be excluded.
                 </Text>
 
-                <Form>
-                  <Picker
-                    mode="dropdown"
-                    placeholder="Pick One"
-                    placeholderStyle={{ color: "#2874F0" }}
-                    note={false}
-                    headerStyle={{ backgroundColor: "#b95dd3" }}
-                    headerBackButtonTextStyle={{ color: "#fff" }}
-                    headerTitleStyle={{ color: "#fff" }}
-                    selectedValue={this.state.selected}
-                    onValueChange={this.onValueChange}
-                  >
-                    <Picker.Item label="Vegetarian" value="vegetarian" />
-                    <Picker.Item label="Vegan" value="vegan" />
-                    <Picker.Item label="Paleo" value="paleo" />
-                  </Picker>
-                </Form>
+                <TextInput
+                  style={{ height: 100, fontSize: 24 }}
+                  multiline={true}
+                  numberOfLines={4}
+                  editable={true}
+                  maxLength={20}
+                  placeholder="Example: shellfish, olives"
+                  onChangeText={text =>
+                    this.setState({ text: text.toLowerCase() })
+                  }
+                />
               </View>
+            </View>
 
-              <View style={styles.container}>
-                <View style={{ marginHorizontal: 20 }}>
-                  <Text style={styles.textstyle}>
-                    A comma-separated list of allergens or ingredients that must
-                    be excluded.
-                  </Text>
-
-                  <TextInput
-                    style={{ height: 100, fontSize: 24 }}
-                    multiline={true}
-                    numberOfLines={4}
-                    editable={true}
-                    maxLength={20}
-                    placeholder="Example: shellfish, olives"
-                    onChangeText={text =>
-                      this.setState({ text: text.toLowerCase() })
-                    }
-                  />
-                </View>
-              </View>
-
-              <View
-                style={{
-                  top: 30
-                }}
+            <View
+              style={{
+                top: 30
+              }}
+            >
+              <Button
+                iconLeft
+                full
+                success
+                style={{ height: 80 }}
+                onPress={() => this._searchAnswer(this.state)}
               >
-                <Button
-                  iconLeft
-                  full
-                  success
-                  style={{ height: 80 }}
-                  onPress={() => this._searchAnswer(this.state)}
-                >
-                  <Icon name="search" style={{ fontSize: 50 }} />
-                  <Text style={{ left: 10, fontSize: 40, color: "white" }}>
-                    {" "}
-                    Look up
-                  </Text>
-                </Button>
-              </View>
+                <Icon name="search" style={{ fontSize: 50 }} />
+                <Text style={{ left: 10, fontSize: 40, color: "white" }}>
+                  {" "}
+                  Look up
+                </Text>
+              </Button>
             </View>
           </Content>
         )}
