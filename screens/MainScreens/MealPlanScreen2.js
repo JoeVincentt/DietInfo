@@ -26,49 +26,48 @@ export default class MealPlanScreen2 extends Component {
 
   state = {
     isLoading: false,
-    // content: this.props.navigation.getParam("content"),
-    content: {
-      meals: [
-        {
-          id: 1,
-          title: "Cream Cheese Banana Nut Bread",
-          readyInMinutes: 90,
-          image: "cream-cheese-banana-nut-bread-2-49993.jpg",
-          imageUrls: [
-            "cream-cheese-banana-nut-bread-2-49993.jpg",
-            "cream_cheese_banana_nut_bread-49993.jpg"
-          ]
-        },
-        {
-          id: 2,
-          title: "Cream Cheese Banana Nut Bread",
-          readyInMinutes: 90,
-          image: "cream-cheese-banana-nut-bread-2-49993.jpg",
-          imageUrls: [
-            "cream-cheese-banana-nut-bread-2-49993.jpg",
-            "cream_cheese_banana_nut_bread-49993.jpg"
-          ]
-        },
-        {
-          id: 3,
-          title: "Cream Cheese Banana Nut Bread",
-          readyInMinutes: 90,
-          image: "cream-cheese-banana-nut-bread-2-49993.jpg",
-          imageUrls: [
-            "cream-cheese-banana-nut-bread-2-49993.jpg",
-            "cream_cheese_banana_nut_bread-49993.jpg"
-          ]
-        }
-      ],
-      nutrients: {
-        calories: 1988,
-        protein: 55.64,
-        fat: 121.19,
-        carbohydrates: 177.96
-      }
-    },
-
+    content: this.props.navigation.getParam("content"),
     fullRecipe: ""
+    // content: {
+    //   meals: [
+    //     {
+    //       id: 1,
+    //       title: "Cream Cheese Banana Nut Bread",
+    //       readyInMinutes: 90,
+    //       image: "cream-cheese-banana-nut-bread-2-49993.jpg",
+    //       imageUrls: [
+    //         "cream-cheese-banana-nut-bread-2-49993.jpg",
+    //         "cream_cheese_banana_nut_bread-49993.jpg"
+    //       ]
+    //     },
+    //     {
+    //       id: 2,
+    //       title: "Cream Cheese Banana Nut Bread",
+    //       readyInMinutes: 90,
+    //       image: "cream-cheese-banana-nut-bread-2-49993.jpg",
+    //       imageUrls: [
+    //         "cream-cheese-banana-nut-bread-2-49993.jpg",
+    //         "cream_cheese_banana_nut_bread-49993.jpg"
+    //       ]
+    //     },
+    //     {
+    //       id: 3,
+    //       title: "Cream Cheese Banana Nut Bread",
+    //       readyInMinutes: 90,
+    //       image: "cream-cheese-banana-nut-bread-2-49993.jpg",
+    //       imageUrls: [
+    //         "cream-cheese-banana-nut-bread-2-49993.jpg",
+    //         "cream_cheese_banana_nut_bread-49993.jpg"
+    //       ]
+    //     }
+    //   ],
+    //   nutrients: {
+    //     calories: 1988,
+    //     protein: 55.64,
+    //     fat: 121.19,
+    //     carbohydrates: 177.96
+    //   }
+    // },
   };
 
   // _storeData = async () => {
@@ -111,11 +110,9 @@ export default class MealPlanScreen2 extends Component {
         }
       );
 
-      response = response.json();
-      response = JSON.stringify(response);
-      response = JSON.parse(response);
-      console.log(this.state.fullRecipe);
+      response = await response.json();
       this.setState({ fullRecipe: response, isLoading: false });
+      // console.log(this.state.fullRecipe);
       this.props.navigation.navigate("MealPlan3", {
         fullRecipe: this.state.fullRecipe,
         mealImage: mealImage

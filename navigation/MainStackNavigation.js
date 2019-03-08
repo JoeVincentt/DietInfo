@@ -12,6 +12,7 @@ import MealPlanScreen from "../screens/MainScreens/MealPlanScreen";
 import MealPlanScreen2 from "../screens/MainScreens/MealPlanScreen2";
 import MealPlanScreen3 from "../screens/MainScreens/MealPlanScreen3";
 import LandingScreen from "../screens/MainScreens/LandingScreen";
+import LandingScreen2 from "../screens/MainScreens/LandingScreen2";
 
 const QuestionStack = createStackNavigator({
   Question: QuestionScreen,
@@ -45,7 +46,8 @@ MealPlanStack.navigationOptions = {
 };
 
 const LandingStack = createStackNavigator({
-  Landing: LandingScreen
+  Landing: LandingScreen,
+  Landing2: LandingScreen2
 });
 
 LandingStack.navigationOptions = {
