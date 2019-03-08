@@ -20,7 +20,9 @@ const _ = require("lodash");
 
 export default class QuestionScreen extends React.Component {
   static navigationOptions = {
-    title: "Question"
+    title: "Question",
+    headerStyle: { backgroundColor: "black" },
+    headerTitleStyle: { color: "orange" }
   };
 
   state = {

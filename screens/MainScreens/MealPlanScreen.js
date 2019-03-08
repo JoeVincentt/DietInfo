@@ -30,7 +30,9 @@ const _ = require("lodash");
 
 export default class MealPlanScreen extends React.Component {
   static navigationOptions = {
-    title: "Meal Plan"
+    title: "Meal Plan",
+    headerStyle: { backgroundColor: "black" },
+    headerTitleStyle: { color: "orange" }
   };
 
   state = {

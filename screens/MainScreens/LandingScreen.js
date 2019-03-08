@@ -38,7 +38,9 @@ const initialState = {
 
 export default class LandingScreen extends React.Component {
   static navigationOptions = {
-    title: "Diet Info"
+    title: "Diet Info",
+    headerStyle: { backgroundColor: "black" },
+    headerTitleStyle: { color: "orange" }
   };
 
   state = {
@@ -403,7 +405,7 @@ export default class LandingScreen extends React.Component {
 
           {/* Calculate Button  */}
 
-          <Row style={{ flex: 1, top: 30 }}>
+          <Row style={{ flex: 1, marginVertical: 20 }}>
             <View style={styles.calculateButtonContainer}>
               <Button
                 iconLeft

@@ -17,7 +17,9 @@ import { View, Text } from "react-native";
 
 export default class QuestionScreen2 extends Component {
   static navigationOptions = {
-    title: "Info"
+    title: "Info",
+    headerStyle: { backgroundColor: "black" },
+    headerTitleStyle: { color: "orange" }
   };
   state = {
     content: this.props.navigation.getParam("content")

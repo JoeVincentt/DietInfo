@@ -21,7 +21,9 @@ import { AsyncStorage } from "react-native";
 
 export default class MealPlanScreen2 extends Component {
   static navigationOptions = {
-    title: "Meal Plan"
+    title: "Meal Plan",
+    headerStyle: { backgroundColor: "black" },
+    headerTitleStyle: { color: "orange" }
   };
 
   state = {

@@ -16,7 +16,9 @@ import { Text, Linking } from "react-native";
 
 export default class MealPlanScreen3 extends Component {
   static navigationOptions = {
-    title: "Recipe"
+    title: "Recipe",
+    headerStyle: { backgroundColor: "black" },
+    headerTitleStyle: { color: "orange" }
   };
   state = {
     fullRecipe: this.props.navigation.getParam("fullRecipe"),

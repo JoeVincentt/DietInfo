@@ -25,7 +25,9 @@ import { Col, Row, Grid } from "react-native-easy-grid";
 
 export default class LandingScreen extends React.Component {
   static navigationOptions = {
-    title: "Result Info"
+    title: "Result Info",
+    headerStyle: { backgroundColor: "black" },
+    headerTitleStyle: { color: "orange" }
   };
 
   state = {

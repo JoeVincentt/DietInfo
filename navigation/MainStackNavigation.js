@@ -5,6 +5,8 @@ import {
   createBottomTabNavigator
 } from "react-navigation";
 
+import { createMaterialBottomTabNavigator } from "react-navigation-material-bottom-tabs";
+
 import TabBarIcon from "../components/TabBarIcon";
 import QuestionScreen from "../screens/MainScreens/QuestionScreen";
 import QuestionScreen2 from "../screens/MainScreens/QuestionScreen2";
@@ -55,13 +57,30 @@ LandingStack.navigationOptions = {
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={Platform.OS === "ios" ? "ios-home" : "md-home"}
+      name={Platform.OS === "ios" ? "ios-calculator" : "md-calculator"}
     />
   )
 };
 
-export default createBottomTabNavigator({
-  MealPlanStack,
-  LandingStack,
-  QuestionStack
-});
+export default createMaterialBottomTabNavigator(
+  {
+    MealPlanStack,
+    LandingStack,
+    QuestionStack
+  },
+  {
+    initialRouteName: "LandingStack",
+    activeColor: "orange",
+    inactiveColor: "lightgray",
+    barStyle: {
+      paddingTop: Platform.OS === "ios" ? 0 : 0,
+      backgroundColor: "black",
+      borderTopWidth: 1,
+      borderTopColor: "orange"
+    },
+    labeled: false,
+    shifting: true,
+    swipeEnabled: true,
+    animationEnabled: false
+  }
+);
