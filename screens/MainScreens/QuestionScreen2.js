@@ -1,17 +1,6 @@
 import React, { Component } from "react";
 import { Image } from "react-native";
-import {
-  Container,
-  Header,
-  Content,
-  Card,
-  CardItem,
-  Thumbnail,
-  Button,
-  Icon,
-  Left,
-  Body
-} from "native-base";
+import { Container, Content } from "native-base";
 
 import { View, Text } from "react-native";
 
@@ -26,7 +15,13 @@ export default class QuestionScreen2 extends Component {
   };
   render() {
     return (
-      <Container style={{ flexDirection: "row", alignItems: "center" }}>
+      <Container
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+          backgroundColor: "lightgray"
+        }}
+      >
         <Content>
           <View
             style={{ flex: 0, justifyContent: "center", alignItems: "center" }}

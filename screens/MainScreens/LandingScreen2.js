@@ -1,26 +1,6 @@
 import React from "react";
-import {
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  Platform
-} from "react-native";
-import {
-  Button,
-  Left,
-  Right,
-  ListItem,
-  CheckBox,
-  Body,
-  Icon,
-  Toast,
-  Spinner,
-  Form,
-  Picker,
-  H1
-} from "native-base";
+import { StyleSheet, Text, View } from "react-native";
+
 import { Col, Row, Grid } from "react-native-easy-grid";
 
 export default class LandingScreen extends React.Component {
@@ -36,7 +16,7 @@ export default class LandingScreen extends React.Component {
 
   render() {
     return (
-      <Grid>
+      <Grid style={{ backgroundColor: "lightgray" }}>
         <View style={{ margin: 20 }}>
           <Text style={styles.resultText}>Results:</Text>
           <Text style={{ fontFamily: "roboto-bold", fontSize: 30 }}>
@@ -102,7 +82,7 @@ const styles = StyleSheet.create({
   resultText: {
     fontFamily: "roboto-bold",
     fontSize: 40,
-    color: "lightblue"
+    color: "blue"
   },
   cellContainer: {
     flex: 0,

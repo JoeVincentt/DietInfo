@@ -7,22 +7,10 @@ import {
   TextInput,
   Platform
 } from "react-native";
-import {
-  Button,
-  Left,
-  Right,
-  ListItem,
-  CheckBox,
-  Body,
-  Icon,
-  Toast,
-  Spinner,
-  Form,
-  Picker,
-  H1
-} from "native-base";
+import { Button, ListItem, CheckBox, Icon, Form, Picker } from "native-base";
 import { Col, Row, Grid } from "react-native-easy-grid";
 import * as firebase from "firebase";
+import { men_BMR, women_BMR, activityIndicator } from "../../utils/utils";
 const _ = require("lodash");
 
 const initialState = {
@@ -47,51 +35,10 @@ export default class LandingScreen extends React.Component {
     ...initialState
   };
 
-  _logOut = () => {
-    firebase.auth().signOut();
-    this.props.navigation.navigate("Auth");
-  };
-
-  men_BMR = (weight, height, age) => {
-    const calories = (
-      88.362 +
-      13.397 * weight +
-      4.799 * height -
-      5.677 * age
-    ).toFixed();
-    return calories;
-  };
-  women_BMR = (weight, height, age) => {
-    const calories = (
-      447.593 +
-      9.247 * weight +
-      3.098 * height -
-      4.33 * age
-    ).toFixed();
-    return calories;
-  };
-
-  activityIndicator = dailyCalories => {
-    const activity = this.state.activity;
-    if (activity === "bmr") {
-      return dailyCalories;
-    }
-    if (activity === "senedentary") {
-      return (dailyCalories * 1.2).toFixed();
-    }
-    if (activity === "light") {
-      return (dailyCalories * 1.375).toFixed();
-    }
-    if (activity === "moderately") {
-      return dailyCalories * (1.55).toFixed();
-    }
-    if (activity === "very") {
-      return (dailyCalories * 1.725).toFixed();
-    }
-    if (activity === "extra") {
-      return (dailyCalories * 1.9).toFixed();
-    }
-  };
+  // _logOut = () => {
+  //   firebase.auth().signOut();
+  //   this.props.navigation.navigate("Auth");
+  // };
 
   _calculateCalories = async () => {
     let weightKG;
@@ -107,13 +54,13 @@ export default class LandingScreen extends React.Component {
     }
 
     if (this.state.gender === "male") {
-      let dailyCalories = this.men_BMR(weightKG, heightCM, age);
-      dailyCalories = this.activityIndicator(dailyCalories);
+      let dailyCalories = men_BMR(weightKG, heightCM, age);
+      dailyCalories = activityIndicator(dailyCalories, this.state.activity);
       await this.setState({ dailyCalories });
     }
     if (this.state.gender === "female") {
-      let dailyCalories = this.women_BMR(weightKG, heightCM, age);
-      dailyCalories = this.activityIndicator(dailyCalories);
+      let dailyCalories = women_BMR(weightKG, heightCM, age);
+      dailyCalories = activityIndicator(dailyCalories, this.state.activity);
       await this.setState({ dailyCalories });
     }
     await this.setState({ ...initialState });
@@ -365,8 +312,8 @@ export default class LandingScreen extends React.Component {
                         placeholder={this.state.activity}
                         placeholderStyle={{ color: "#2874F0" }}
                         note={false}
-                        // headerStyle={{ backgroundColor: "#b95dd3" }}
-                        // headerBackButtonTextStyle={{ color: "#fff" }}
+                        headerStyle={{ backgroundColor: "black" }}
+                        headerBackButtonTextStyle={{ color: "orange" }}
                         // headerTitleStyle={{ color: "#fff" }}
                         selectedValue={this.state.activity}
                         onValueChange={activity => this.setState({ activity })}

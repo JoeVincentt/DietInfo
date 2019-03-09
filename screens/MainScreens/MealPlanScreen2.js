@@ -36,6 +36,7 @@ export default class MealPlanScreen2 extends Component {
     //       id: 1,
     //       title: "Cream Cheese Banana Nut Bread",
     //       readyInMinutes: 90,
+    //       servings: 2,
     //       image: "cream-cheese-banana-nut-bread-2-49993.jpg",
     //       imageUrls: [
     //         "cream-cheese-banana-nut-bread-2-49993.jpg",
@@ -46,6 +47,7 @@ export default class MealPlanScreen2 extends Component {
     //       id: 2,
     //       title: "Cream Cheese Banana Nut Bread",
     //       readyInMinutes: 90,
+    //       servings: 2,
     //       image: "cream-cheese-banana-nut-bread-2-49993.jpg",
     //       imageUrls: [
     //         "cream-cheese-banana-nut-bread-2-49993.jpg",
@@ -56,6 +58,7 @@ export default class MealPlanScreen2 extends Component {
     //       id: 3,
     //       title: "Cream Cheese Banana Nut Bread",
     //       readyInMinutes: 90,
+    //       servings: 2,
     //       image: "cream-cheese-banana-nut-bread-2-49993.jpg",
     //       imageUrls: [
     //         "cream-cheese-banana-nut-bread-2-49993.jpg",
@@ -69,7 +72,7 @@ export default class MealPlanScreen2 extends Component {
     //     fat: 121.19,
     //     carbohydrates: 177.96
     //   }
-    // },
+    // }
   };
 
   // _storeData = async () => {
@@ -126,7 +129,7 @@ export default class MealPlanScreen2 extends Component {
 
   render() {
     return (
-      <Container>
+      <Container style={{ backgroundColor: "lightgray" }}>
         {this.state.isLoading ? (
           <View
             style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
@@ -175,7 +178,11 @@ const MealsList = ({ meals, _searchAnswer }) => {
       <View>
         <List>
           {meals.map(meal => (
-            <ListItem thumbnail key={meal.id}>
+            <ListItem
+              thumbnail
+              key={meal.id}
+              style={styles.listItemBottomBorder}
+            >
               <Left>
                 <Thumbnail
                   square
@@ -192,7 +199,7 @@ const MealsList = ({ meals, _searchAnswer }) => {
                   Ready in {meal.readyInMinutes} minutes
                 </Text>
                 <Text note numberOfLines={1}>
-                  Servings {meal.servings} minutes
+                  Servings {meal.servings}
                 </Text>
               </Body>
               <Right>
@@ -224,7 +231,7 @@ const NutritionList = props => {
         <H2>Nutrition Facts</H2>
       </View>
       <List>
-        <ListItem noIndent>
+        <ListItem style={styles.listItemBottomBorder}>
           <Left>
             <Text style={styles.textstyle}>Calories:</Text>
           </Left>
@@ -234,7 +241,7 @@ const NutritionList = props => {
             </Text>
           </Right>
         </ListItem>
-        <ListItem noIndent>
+        <ListItem style={styles.listItemBottomBorder}>
           <Left>
             <Text style={styles.textstyle}>Protein:</Text>
           </Left>
@@ -244,7 +251,7 @@ const NutritionList = props => {
             </Text>
           </Right>
         </ListItem>
-        <ListItem>
+        <ListItem style={styles.listItemBottomBorder}>
           <Left>
             <Text style={styles.textstyle}>Fat:</Text>
           </Left>
@@ -254,7 +261,7 @@ const NutritionList = props => {
             </Text>
           </Right>
         </ListItem>
-        <ListItem>
+        <ListItem style={styles.listItemBottomBorder}>
           <Left>
             <Text style={styles.textstyle}>Carbohydrates:</Text>
           </Left>
@@ -273,5 +280,9 @@ const styles = StyleSheet.create({
   textstyle: {
     fontSize: 20,
     fontFamily: "roboto-regular"
+  },
+  listItemBottomBorder: {
+    borderBottomColor: "orange",
+    borderBottomWidth: 0.5
   }
 });

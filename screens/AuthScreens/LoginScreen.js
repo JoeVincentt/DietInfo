@@ -4,15 +4,13 @@ import * as firebase from "firebase";
 import firebaseConfig from "../../firebase";
 firebase.initializeApp(firebaseConfig);
 import { View, Text, ActivityIndicator, StatusBar } from "react-native";
-import { Container, Header, Content, Button, Icon } from "native-base";
+import { Button, Icon } from "native-base";
 
 class LoginScreen extends Component {
   static navigationOptions = {
     title: "Diet Info",
-    headerStyle: {
-      backgroundColor: "#fff"
-    },
-    headerTintColor: "black"
+    headerStyle: { backgroundColor: "black" },
+    headerTitleStyle: { color: "orange" }
   };
   constructor(props) {
     super(props);
@@ -26,7 +24,7 @@ class LoginScreen extends Component {
     firebase.auth().onAuthStateChanged(user => {
       if (user != null) {
         // console.log(user);
-        this.props.navigation.navigate("MealPlan3");
+        this.props.navigation.navigate("Landing");
       } else {
         this.FacebookLogIn();
       }
@@ -75,7 +73,7 @@ class LoginScreen extends Component {
           flex: 1,
           alignItems: "center",
           justifyContent: "center",
-          backgroundColor: "#fff"
+          backgroundColor: "lightgray"
         }}
       >
         {this.state.isLoading ? (
