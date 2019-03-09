@@ -1,6 +1,7 @@
 import React from "react";
 import { ScrollView, StyleSheet, Text, View, TextInput } from "react-native";
 import { Container, Content, Button, Icon, Spinner } from "native-base";
+import { Constants } from "expo";
 import { _textTrim, _isEmpty } from "../../utils/utils";
 const _ = require("lodash");
 
@@ -33,8 +34,7 @@ export default class QuestionScreen extends React.Component {
           {
             method: "GET",
             headers: {
-              "X-RapidAPI-Key":
-                "b99dd4b186msheefd2f2cd1467a3p10b334jsnd9346b61c2ed",
+              "X-RapidAPI-Key": `${Constants.manifest.extra.foodapi}`,
               "content-type": "application/json"
             }
           }

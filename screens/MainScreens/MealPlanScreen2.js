@@ -16,6 +16,7 @@ import {
   Footer,
   FooterTab
 } from "native-base";
+import { Constants } from "expo";
 import { Text, View, StyleSheet } from "react-native";
 import { AsyncStorage } from "react-native";
 
@@ -108,8 +109,7 @@ export default class MealPlanScreen2 extends Component {
         {
           method: "GET",
           headers: {
-            "X-RapidAPI-Key":
-              "b99dd4b186msheefd2f2cd1467a3p10b334jsnd9346b61c2ed",
+            "X-RapidAPI-Key": `${Constants.manifest.extra.foodapi}`,
             "content-type": "application/json"
           }
         }

@@ -10,6 +10,7 @@ import {
   Picker,
   H2
 } from "native-base";
+import { Constants } from "expo";
 import Slider from "react-native-slider";
 import { _textReductor } from "../../utils/utils";
 const _ = require("lodash");
@@ -42,8 +43,7 @@ export default class MealPlanScreen extends React.Component {
       let response = await fetch(_textReductor(state), {
         method: "GET",
         headers: {
-          "X-RapidAPI-Key":
-            "b99dd4b186msheefd2f2cd1467a3p10b334jsnd9346b61c2ed",
+          "X-RapidAPI-Key": `${Constants.manifest.extra.foodapi}`,
           "content-type": "application/json"
         }
       });

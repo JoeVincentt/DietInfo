@@ -8,3 +8,5 @@ npm-debug.*
 keys.js
 firebase.js
 node_modules
+app.json
+.app.json
