@@ -111,7 +111,7 @@ export default class MealPlanScreen extends React.Component {
                   <Picker
                     style={styles.picker}
                     mode="dropdown"
-                    placeholder="Pick Diet"
+                    placeholder={this.state.selected}
                     placeholderStyle={{ color: "black" }}
                     note={false}
                     headerStyle={{ backgroundColor: "black" }}
@@ -120,6 +120,7 @@ export default class MealPlanScreen extends React.Component {
                     selectedValue={this.state.selected}
                     onValueChange={this.onValueChange}
                   >
+                    <Picker.Item label="Regular" value="" />
                     <Picker.Item label="Vegetarian" value="vegetarian" />
                     <Picker.Item label="Vegan" value="vegan" />
                     <Picker.Item label="Paleo" value="paleo" />

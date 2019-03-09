@@ -84,7 +84,8 @@ export const _textEdit = text => {
     .replace(/\<\/b\>/gi, "")
     .replace(/\<a href\=/gi, "")
     .replace(/\<\/a\>/gi, "")
-    .replace(/\>/gi, "");
+    .replace(/\>/gi, "")
+    .replace(/\"/gi, " ");
   // tx = reactStringReplace(tx, /\//g, (match, i) => (
   //   <Text key={i} style={{ color: "red", fontFamily: "roboto-bold" }}>
   //     {match}

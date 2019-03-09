@@ -56,7 +56,7 @@ export default class MealPlanScreen3 extends Component {
                 <Hyperlink
                   linkDefault={true}
                   linkStyle={{ color: "#2980b9", fontSize: 20 }}
-                  linkText={url => (url ? "Link" : url)}
+                  linkText={url => (url ? " click for " : url)}
                 >
                   <Text style={{ fontSize: 20, fontFamily: "roboto-regular" }}>
                     {_textEdit(this.state.fullRecipe.summary)}
