@@ -28,7 +28,6 @@ export default class MealPlanScreen2 extends Component {
   };
 
   state = {
-    saved: false,
     isLoading: false,
     content: this.props.navigation.getParam("content"),
     fullRecipe: ""
@@ -77,51 +76,29 @@ export default class MealPlanScreen2 extends Component {
     // }
   };
 
-  _storeData = async () => {
-    try {
-      this.setState({ saved: true });
-      let localStorage;
-      await AsyncStorage.getItem("DietInfo", async (err, result) => {
-        if (result !== null) {
-          const newRes = await JSON.parse(result);
-          console.log(typeof newRes);
-          console.log(newRes);
-          const newItem = {
-            date: Date.now(),
-            content: this.state.content
-          };
-          localStorage = newRes.concat(newItem);
-          await AsyncStorage.setItem(`DietInfo`, JSON.stringify(localStorage));
-        }
-
-        if (result === null) {
-          localStorage = {
-            meals: [
-              {
-                date: Date.now(),
-                content: this.state.content
-              }
-            ]
-          };
-          AsyncStorage.setItem(
-            `DietInfo`,
-            JSON.stringify(localStorage),
-            error => {
-              console.log(error);
-            }
-          );
-        }
-      });
-
-      // AsyncStorage.removeItem("DietInfo", error => {
-      //   console.log("items deleted");
-      //   console.log(error);
-      // });
-    } catch (error) {
-      // Error saving data
-      console.log(error);
-    }
-  };
+  // _storeData = async () => {
+  //   try {
+  //     await AsyncStorage.setItem(
+  //       `1`,
+  //       JSON.stringify(this.state.content),
+  //       () => {
+  //         AsyncStorage.mergeItem(
+  //           "1",
+  //           JSON.stringify(this.state.content),
+  //           () => {
+  //             AsyncStorage.getItem("1", (err, result) => {
+  //               let x = JSON.parse(result);
+  //               console.log("Parsed", x);
+  //             });
+  //           }
+  //         );
+  //       }
+  //     );
+  //   } catch (error) {
+  //     // Error saving data
+  //     console.log(error);
+  //   }
+  // };
 
   _searchAnswer = async (recipeId, mealImage) => {
     try {
@@ -166,22 +143,19 @@ export default class MealPlanScreen2 extends Component {
               _searchAnswer={this._searchAnswer}
             />
             <NutritionList content={this.state.content} />
-            <Footer style={{ backgroundColor: "transparent" }}>
+            {/* <Footer style={{ backgroundColor: "transparent" }}>
               <Button
                 style={{
                   height: 100
                 }}
                 transparent
-                textStyle={{ color: "red" }}
+                textStyle={{ color: "#87838B" }}
                 onPress={() => this._storeData()}
               >
-                <Icon
-                  style={{ fontSize: 50 }}
-                  name={this.state.saved ? "heart" : "heart-empty"}
-                />
+                <Icon style={{ fontSize: 50 }} name="save" />
                 <Text>Save</Text>
               </Button>
-            </Footer>
+            </Footer> */}
           </Content>
         )}
       </Container>

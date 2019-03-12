@@ -15,9 +15,6 @@ import MealPlanScreen2 from "../screens/MainScreens/MealPlanScreen2";
 import MealPlanScreen3 from "../screens/MainScreens/MealPlanScreen3";
 import LandingScreen from "../screens/MainScreens/LandingScreen";
 import LandingScreen2 from "../screens/MainScreens/LandingScreen2";
-import FavoriteScreen from "../screens/MainScreens/FavoriteScreen";
-import FavoriteScreen2 from "../screens/MainScreens/FavoriteScreen2";
-import FavoriteScreen3 from "../screens/MainScreens/FavoriteScreen3";
 
 const QuestionStack = createStackNavigator({
   Question: QuestionScreen,
@@ -65,28 +62,11 @@ LandingStack.navigationOptions = {
   )
 };
 
-const FavoriteStack = createStackNavigator({
-  Favorite: FavoriteScreen,
-  Favorite2: FavoriteScreen2,
-  Favorite3: FavoriteScreen3
-});
-
-FavoriteStack.navigationOptions = {
-  tabBarLabel: "Favorite",
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === "ios" ? "ios-heart-empty" : "md-heart-empty"}
-    />
-  )
-};
-
 export default createMaterialBottomTabNavigator(
   {
     MealPlanStack,
     LandingStack,
-    QuestionStack,
-    FavoriteStack
+    QuestionStack
   },
   {
     initialRouteName: "LandingStack",
