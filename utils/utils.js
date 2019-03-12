@@ -1,3 +1,6 @@
+// import React from "react";
+// import { Text } from "react-native";
+
 export const men_BMR = (weight, height, age) => {
   const calories = (
     88.362 +
@@ -86,7 +89,7 @@ export const _textEdit = text => {
     .replace(/\<\/a\>/gi, "")
     .replace(/\>/gi, "")
     .replace(/\"/gi, " ");
-  // tx = reactStringReplace(tx, /\//g, (match, i) => (
+  // tx = reactStringReplace(tx, /\b\d{1,3}\b/gi, (match, i) => (
   //   <Text key={i} style={{ color: "red", fontFamily: "roboto-bold" }}>
   //     {match}
   //   </Text>

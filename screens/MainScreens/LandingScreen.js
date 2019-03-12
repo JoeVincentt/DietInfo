@@ -82,7 +82,13 @@ export default class LandingScreen extends React.Component {
               justifyContent: "center"
             }}
           >
-            <Text style={{ fontFamily: "roboto-bold", fontSize: 35 }}>
+            <Text
+              style={{
+                fontFamily: "roboto-regular",
+                fontSize: 28,
+                marginTop: 20
+              }}
+            >
               - Calories Calculator -
             </Text>
           </Row>
