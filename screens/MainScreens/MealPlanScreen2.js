@@ -12,13 +12,10 @@ import {
   Right,
   Button,
   H2,
-  Spinner,
-  Footer,
-  FooterTab
+  Spinner
 } from "native-base";
 import { Constants } from "expo";
 import { Text, View, StyleSheet } from "react-native";
-import { AsyncStorage } from "react-native";
 
 export default class MealPlanScreen2 extends Component {
   static navigationOptions = {
@@ -76,30 +73,6 @@ export default class MealPlanScreen2 extends Component {
     // }
   };
 
-  // _storeData = async () => {
-  //   try {
-  //     await AsyncStorage.setItem(
-  //       `1`,
-  //       JSON.stringify(this.state.content),
-  //       () => {
-  //         AsyncStorage.mergeItem(
-  //           "1",
-  //           JSON.stringify(this.state.content),
-  //           () => {
-  //             AsyncStorage.getItem("1", (err, result) => {
-  //               let x = JSON.parse(result);
-  //               console.log("Parsed", x);
-  //             });
-  //           }
-  //         );
-  //       }
-  //     );
-  //   } catch (error) {
-  //     // Error saving data
-  //     console.log(error);
-  //   }
-  // };
-
   _searchAnswer = async (recipeId, mealImage) => {
     try {
       this.setState({ isLoading: true });
@@ -123,7 +96,8 @@ export default class MealPlanScreen2 extends Component {
         mealImage: mealImage
       });
     } catch (error) {
-      console.log(error);
+      alert("Network Error");
+      await this.setState({ isLoading: false });
     }
   };
 
@@ -134,7 +108,7 @@ export default class MealPlanScreen2 extends Component {
           <View
             style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
           >
-            <Spinner />
+            <Spinner color="green" />
           </View>
         ) : (
           <Content>

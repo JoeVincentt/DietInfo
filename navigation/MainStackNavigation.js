@@ -1,9 +1,6 @@
 import React from "react";
 import { Platform } from "react-native";
-import {
-  createStackNavigator,
-  createBottomTabNavigator
-} from "react-navigation";
+import { createStackNavigator } from "react-navigation";
 
 import { createMaterialBottomTabNavigator } from "react-navigation-material-bottom-tabs";
 
@@ -70,17 +67,16 @@ export default createMaterialBottomTabNavigator(
   },
   {
     initialRouteName: "LandingStack",
-    activeColor: "orange",
-    inactiveColor: "lightgray",
     barStyle: {
       paddingTop: Platform.OS === "ios" ? 0 : 0,
       backgroundColor: "black",
       borderTopWidth: 1,
       borderTopColor: "orange"
     },
-    labeled: false,
+    lazy: true,
+    labeled: true,
     shifting: true,
     swipeEnabled: true,
-    animationEnabled: false
+    animationEnabled: true
   }
 );

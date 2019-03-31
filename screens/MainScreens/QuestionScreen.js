@@ -22,7 +22,7 @@ export default class QuestionScreen extends React.Component {
     if (_isEmpty(question)) {
       alert("It's Empty!");
     } else if (question.length < 10) {
-      alert("Question too short");
+      alert("Question is too short.");
     } else {
       try {
         this.setState({ isLoading: true });
@@ -50,7 +50,8 @@ export default class QuestionScreen extends React.Component {
           content: this.state.content
         });
       } catch (error) {
-        console.log(error);
+        alert("Network Error");
+        await this.setState({ isLoading: false });
       }
     }
   };
@@ -85,24 +86,7 @@ export default class QuestionScreen extends React.Component {
                 {this.state.text && "❓"}
               </Text>
             </View>
-            <View
-              style={{
-                marginTop: 10
-              }}
-            >
-              <Button
-                iconLeft
-                full
-                style={{ height: 80, backgroundColor: "green" }}
-                onPress={() => this._searchAnswer(this.state.text)}
-              >
-                <Icon name="search" style={{ fontSize: 50 }} />
-                <Text style={{ left: 10, fontSize: 40, color: "white" }}>
-                  {" "}
-                  Look up
-                </Text>
-              </Button>
-            </View>
+
             <View style={styles.instructionContainer}>
               <Text
                 style={{
@@ -111,7 +95,6 @@ export default class QuestionScreen extends React.Component {
                   color: "black"
                 }}
               >
-                {" "}
                 Instructions
               </Text>
               <View style={styles.instructionTextContainer}>
@@ -135,6 +118,24 @@ export default class QuestionScreen extends React.Component {
                   'How much vitamin c is in 2 apples?'
                 </Text>
               </View>
+            </View>
+            <View
+              style={{
+                flex: 1,
+                marginVertical: 20
+              }}
+            >
+              <Button
+                iconLeft
+                full
+                style={{ height: 80, backgroundColor: "green" }}
+                onPress={() => this._searchAnswer(this.state.text)}
+              >
+                <Icon name="search" style={{ fontSize: 50 }} />
+                <Text style={{ left: 10, fontSize: 40, color: "white" }}>
+                  Look up
+                </Text>
+              </Button>
             </View>
           </Content>
         )}
@@ -163,7 +164,7 @@ const styles = StyleSheet.create({
   instructionContainer: {
     flex: 1,
     flexDirection: "column",
-    marginTop: 50,
+    marginTop: 30,
     marginHorizontal: 50,
     alignItems: "center",
     height: "100%"

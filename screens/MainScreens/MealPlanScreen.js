@@ -54,7 +54,8 @@ export default class MealPlanScreen extends React.Component {
         content: this.state.content
       });
     } catch (error) {
-      console.log(error);
+      alert("Network Error");
+      await this.setState({ isLoading: false });
     }
   };
 
@@ -63,7 +64,7 @@ export default class MealPlanScreen extends React.Component {
       <Container style={{ backgroundColor: "lightgray" }}>
         {this.state.isLoading ? (
           <View style={styles.spinner}>
-            <Spinner />
+            <Spinner color="green" />
           </View>
         ) : (
           <Content>

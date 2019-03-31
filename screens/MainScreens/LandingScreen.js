@@ -9,7 +9,6 @@ import {
 } from "react-native";
 import { Button, ListItem, CheckBox, Icon, Form, Picker } from "native-base";
 import { Col, Row, Grid } from "react-native-easy-grid";
-import * as firebase from "firebase";
 import { men_BMR, women_BMR, activityIndicator } from "../../utils/utils";
 const _ = require("lodash");
 
@@ -35,12 +34,7 @@ export default class LandingScreen extends React.Component {
     ...initialState
   };
 
-  // _logOut = () => {
-  //   firebase.auth().signOut();
-  //   this.props.navigation.navigate("Auth");
-  // };
-
-  _calculateCalories = async () => {
+  calculateCalories = async () => {
     let weightKG;
     let heightCM;
     const age = this.state.age;
@@ -67,8 +61,32 @@ export default class LandingScreen extends React.Component {
     this.props.navigation.navigate("Landing2", {
       dailyCalories: this.state.dailyCalories
     });
+  };
 
-    console.log(this.state.dailyCalories);
+  _calculateCalories = async () => {
+    if (this.state.units === "us") {
+      if (
+        this.state.feet.trim().length === 0 ||
+        this.state.inches.trim().length === 0 ||
+        this.state.weight.trim().length === 0 ||
+        this.state.age.trim().length === 0
+      ) {
+        alert("Fill all fields please!");
+      } else {
+        await this.calculateCalories();
+      }
+    }
+    if (this.state.units === "metric") {
+      if (
+        this.state.cm.trim().length === 0 ||
+        this.state.weight.trim().length === 0 ||
+        this.state.age.trim().length === 0
+      ) {
+        alert("Fill all fields please!");
+      } else {
+        await this.calculateCalories();
+      }
+    }
   };
 
   render() {
@@ -82,7 +100,9 @@ export default class LandingScreen extends React.Component {
               justifyContent: "center"
             }}
           >
-            <Text style={{ fontFamily: "roboto-bold", fontSize: 35 }}>
+            <Text
+              style={{ fontFamily: "roboto-bold", fontSize: 30, marginTop: 10 }}
+            >
               - Calories Calculator -
             </Text>
           </Row>
